@@ -17,7 +17,7 @@ It integrates multiple data sources (TMDB, OMDB, MovieLens) and provides a set o
 ## Architecture
 
 Each microservice runs independently and is orchestrated together in Kubernetes for production.
-The project has been deployed on a bare-metal Kubernetes cluster with the MetalDB load balancer for IP address
+The project has been deployed on a bare-metal Kubernetes cluster with the MetalLB load balancer for IP address
 assignment.  
 Kubernetes deployment files are available in each service's deploy folder.  
 Replace `docker_private_registry_url` in the deployment files with your private docker registry or Docker Hub url.
