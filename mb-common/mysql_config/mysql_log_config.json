@@ -1,0 +1,35 @@
+{
+  "development": {
+    "dialect": "mysql",
+    "operatorsAliases": "0",
+    "timestamps":true,
+    "freezeTableName": true,
+    "logging": false,
+    "host": "db_host",
+    "username": "db_user",
+    "password": "db_password",
+    "database": "db_name"
+  },
+  "test": {
+    "dialect": "mysql",
+    "operatorsAliases": "0",
+    "timestamps":true,
+    "freezeTableName": true,
+    "logging": false,
+    "host": "db_host",
+    "username": "db_user",
+    "password": "db_password",
+    "database": "db_name"
+  },
+  "production": {
+    "dialect": "mysql",
+    "operatorsAliases": "0",
+    "timestamps":true,
+    "freezeTableName": true,
+    "logging": false,
+    "host": "db_host",
+    "username": "db_user",
+    "password": "db_password",
+    "database": "db_name"
+  }
+}

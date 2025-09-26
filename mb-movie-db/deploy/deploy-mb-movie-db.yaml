@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mb-movie-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: mb-movie-db
+  template:
+    metadata:
+      labels:
+        component: mb-movie-db
+    spec:
+      nodeSelector:
+        role: worker
+      containers:
+        - name: mb-movie-db
+          image: docker_private_registry_url/mb-movie-db-k8s:latest
+          imagePullPolicy: Always
+          stdin: true
+          tty: true
+          env:
+            - name: APP_TYPE
+              value: "dev"
+            - name: APP_URL
+              value: "https://db.project_tld/"
+          ports:
+            - name: mb-api-gateway
+              containerPort: 4770
+            - name: mb-auth
+              containerPort: 4771
+            - name: mb-movie-db
+              containerPort: 4774
+      imagePullSecrets:
+        - name: dregcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mb-movie-db
+spec:
+  type: ClusterIP
+  selector:
+    component: mb-movie-db
+  ports:
+  - name: mb-movie-db
+    port: 4774
+    targetPort: 4774
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-mb-movie-db
+spec:
+  rules:
+  - host: db.project_tld
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mb-movie-db
+            port:
+              number: 4774
+  ingressClassName: nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mb-movie-db-lb
+  annotations:
+    metallb.universe.tf/address-pool: lb-pool
+spec:
+  selector:
+    component: mb-movie-db
+  ports:
+    - protocol: TCP
+      port: 4774       # The port MetalLB listens on (HTTP)
+      targetPort: 4774  # The port the Ingress controller listens on
+  type: LoadBalancer
+

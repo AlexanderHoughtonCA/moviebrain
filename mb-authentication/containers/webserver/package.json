@@ -1,0 +1,25 @@
+{
+  "name": "mb-authentication",
+  "version": "1.0.0",
+  "description": "MovieBrain authentication microservice for issuing and verifying JWT tokens",
+  "main": "index.js",
+  "_moduleAliases": {
+    "common": "../../../mb-common/"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "module-alias": "^2.2.3",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "author": "Alexander Houghton",
+  "license": "MIT"
+}

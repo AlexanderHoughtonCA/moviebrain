@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mb-omdb-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: mb-omdb-api
+  template:
+    metadata:
+      labels:
+        component: mb-omdb-api
+    spec:
+      nodeSelector:
+        role: worker
+      containers:
+        - name: mb-omdb-api
+          image: docker_private_registry_url/mb-omdb-api-k8s:latest
+          imagePullPolicy: Always
+          stdin: true
+          tty: true
+          env:
+            - name: APP_TYPE
+              value: "dev"
+            - name: APP_URL
+              value: "https://omdb.project_tld/"
+          ports:
+            - name: mb-omdb-api
+              containerPort: 4775
+      imagePullSecrets:
+        - name: dregcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mb-omdb-api
+spec:
+  type: ClusterIP
+  selector:
+    component: mb-omdb-api
+  ports:
+  - name: mb-omdb-api
+    port: 4775
+    targetPort: 4775
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-mb-omdb-api
+spec:
+  rules:
+  - host: omdb.project_tld
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mb-omdb-api
+            port:
+              number: 4775
+  ingressClassName: nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mb-omdb-api-lb
+  annotations:
+    metallb.universe.tf/address-pool: lb-pool
+spec:
+  selector:
+    component: mb-omdb-api
+  ports:
+    - protocol: TCP
+      port: 4775       # The port MetalLB listens on (HTTP)
+      targetPort: 4775  # The port the Ingress controller listens on
+  type: LoadBalancer
+

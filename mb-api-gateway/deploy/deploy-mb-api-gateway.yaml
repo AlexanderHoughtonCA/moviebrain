@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mb-api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: mb-api-gateway
+  template:
+    metadata:
+      labels:
+        component: mb-api-gateway
+    spec:
+      nodeSelector:
+        role: worker
+      containers:
+        - name: mb-api-gateway
+          image: docker_private_registry_url/mb-api-gateway-k8s:latest
+          imagePullPolicy: Always
+          stdin: true
+          tty: true
+          env:
+            - name: APP_TYPE
+              value: "dev"
+            - name: APP_URL
+              value: "https://project_tld/"
+          ports:
+            - name: mb-api-gateway
+              containerPort: 4770
+            - name: mb-auth
+              containerPort: 4771
+            - name: mb-movie-db
+              containerPort: 4774
+      imagePullSecrets:
+        - name: dregcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mb-api-gateway
+spec:
+  type: ClusterIP
+  selector:
+    component: mb-api-gateway
+  ports:
+  - name: mb-api-gateway
+    port: 4770
+    targetPort: 4770
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-mb-api-gateway
+spec:
+  rules:
+  - host: project_tld
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mb-api-gateway
+            port:
+              number: 4770
+  ingressClassName: nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mb-apigateway-lb
+  annotations:
+    metallb.universe.tf/address-pool: lb-pool
+spec:
+  selector:
+    component: mb-api-gateway
+  ports:
+    - protocol: TCP
+      port: 4770       # The port MetalLB listens on (HTTP)
+      targetPort: 4770  # The port the Ingress controller listens on
+  type: LoadBalancer
+

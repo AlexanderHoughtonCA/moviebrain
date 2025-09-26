@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mb-tmdb-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: mb-tmdb-api
+  template:
+    metadata:
+      labels:
+        component: mb-tmdb-api
+    spec:
+      nodeSelector:
+        role: worker
+      containers:
+        - name: mb-tmdb-api
+          image: docker_private_registry_url/mb-tmdb-api-k8s:latest
+          imagePullPolicy: Always
+          stdin: true
+          tty: true
+          env:
+            - name: APP_TYPE
+              value: "dev"
+            - name: APP_URL
+              value: "https://tmdb.project_tld/"
+          ports:
+            - name: mb-tmdb-api
+              containerPort: 4776
+      imagePullSecrets:
+        - name: dregcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mb-tmdb-api
+spec:
+  type: ClusterIP
+  selector:
+    component: mb-tmdb-api
+  ports:
+  - name: mb-tmdb-api
+    port: 4776
+    targetPort: 4776
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-mb-tmdb-api
+spec:
+  rules:
+  - host: tmdb.project_tld
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mb-tmdb-api
+            port:
+              number: 4776
+  ingressClassName: nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mb-tmdb-api-lb
+  annotations:
+    metallb.universe.tf/address-pool: lb-pool
+spec:
+  selector:
+    component: mb-tmdb-api
+  ports:
+    - protocol: TCP
+      port: 4776       # The port MetalLB listens on (HTTP)
+      targetPort: 4776  # The port the Ingress controller listens on
+  type: LoadBalancer
+

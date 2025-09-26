@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mb-auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: mb-auth
+  template:
+    metadata:
+      labels:
+        component: mb-auth
+    spec:
+      nodeSelector:
+        role: worker
+      containers:
+        - name: mb-auth
+          image: docker_private_registry_url/mb-authentication-k8s:latest
+          imagePullPolicy: Always
+          stdin: true
+          tty: true
+          env:
+            - name: APP_TYPE
+              value: "dev"
+            - name: APP_URL
+              value: "https://auth.project_tld/"
+          ports:
+            - name: mb-auth
+              containerPort: 4771
+      imagePullSecrets:
+        - name: dregcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mb-auth
+spec:
+  type: ClusterIP
+  selector:
+    component: mb-auth
+  ports:
+  - name: mb-auth
+    port: 4771
+    targetPort: 4771
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-mb-auth
+spec:
+  rules:
+  - host: auth.project_tld
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mb-auth
+            port:
+              number: 4771
+  ingressClassName: nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mb-apigateway-lb
+  annotations:
+    metallb.universe.tf/address-pool: lb-pool
+spec:
+  selector:
+    component: mb-auth
+  ports:
+    - protocol: TCP
+      port: 4771       # The port MetalLB listens on (HTTP)
+      targetPort: 4771  # The port the Ingress controller listens on
+  type: LoadBalancer
+

@@ -1,0 +1,29 @@
+{
+  "name": "mb-movie-db",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "assert": "^2.1.0",
+    "axios": "^1.8.4",
+    "base-64": "^0.1.0",
+    "bcryptjs": "^2.4.3",
+    "express-winston": "^4.2.0",
+    "dotenv": "^16.4.7",
+    "mysql2": "^3.11.3",
+    "openai": "^4.77.0",
+    "path": "^0.12.7",
+    "sanitize": "^2.1.2",
+    "sequelize": "^5.22.5",
+    "sharp": "^0.34.2",
+    "smb2": "^0.2.11",
+    "uuid": "^11.1.0",
+    "winston-mysql": "^1.1.1",
+    "winston": "^3.17.0"
+  }
+}
