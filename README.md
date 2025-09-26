@@ -50,9 +50,9 @@ mb-omdb-api/containers/webserver/.env
 OMDB api keys can be obtained at:
 https://www.omdbapi.com/
 
-All services other than mb-common, have two main folders:
-containers/ - package.json, index.js, Dockerfile and Docker image build script
-deploy/ - Kubernetes deployment scripts
+All services other than mb-common, have two main folders:  
+**containers/** - package.json, index.js, Dockerfile and Docker image build script  
+**deploy/** - Kubernetes deployment scripts
 
 
 ## Tech Stack
@@ -96,6 +96,12 @@ The following script will import data from Movie Lens and create API keys for mb
 5. Copy and paste mb-tmdb-api api key into MB_TMDB_API_KEY in mb-movie-db/containers/webserver/.env
 6. Copy and paste mb-omdb-api api key into MB_OMDB_API_KEY in mb-movie-db/containers/webserver/.env
 
+### MySQL DB Sequelize Migration
+Assuming the DB has been created, run the Sequelize migrations as follows:
+
+1. Navigate to mb-movie-db/containers/webserver/
+2. chmod a+x ./migrate-db.sh
+3. ./migrate-db.sh
 
 
 ### Run Locally
