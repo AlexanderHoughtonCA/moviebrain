@@ -14,6 +14,9 @@ It integrates multiple data sources (TMDB, OMDB, MovieLens) and provides a set o
 - **Common Module** – shared Sequelize models, migrations, and utilities  
 - **Kubernetes Ready** – each service has a `deploy/` folder with manifests for K8S and build scripts to build the Docker images
 
+## Demo
+[Movie Brain Live DEMO](https://movie-brain.com/)
+
 ## Coming Soon
 New microservices for:
 - **Ratings**
