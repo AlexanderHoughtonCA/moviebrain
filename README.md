@@ -87,7 +87,7 @@ npm install
 ### Environment Variables
 - `mb-tmdb-api/.env` → must contain a valid TMDB API key (`TMDB_API_KEY`).  
 - `mb-omdb-api/.env` → must contain a valid OMDB API key (`OMDB_API_KEY`).  
-- `mb-movie-db/.env` import scripts generate temporary keys `MB_TMDB_API_KEY` and `MB_OMDB_API_KEY` for internal use.  (See below)
+- `mb-movie-db/.env` → import scripts generate temporary keys `MB_TMDB_API_KEY` and `MB_OMDB_API_KEY` for internal use.  (See below)
 
 Each service also requires database connection details for Sequelize, see config folder in the relevant services
 and enter values for DB_USER, DB_HOST, DB_PORT etc.  
