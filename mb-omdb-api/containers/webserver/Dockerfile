@@ -7,7 +7,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 EXPOSE 4775
 
 # Ubuntu updates
-# RUN apt-get -y update
+RUN apt-get -y update
 ENV DEBIAN_FRONTEND=noninteractive
 
 ENV APP_BASE=/app/K8S/moviebrain/mb-omdb-api/containers/webserver
@@ -26,7 +26,7 @@ ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 RUN node --version
 RUN npm --version
 
-# RUN apt-get -y update
+RUN apt-get -y update
 
 RUN apt-get install -y default-mysql-client default-libmysqlclient-dev
 
