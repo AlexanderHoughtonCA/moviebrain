@@ -143,7 +143,8 @@ Example endpoints:
 
 ## Notes
 
-- This repository contains **backend services only**. The React frontend is maintained in a separate repository.  
+- This repository contains **backend services only**. The React frontend is maintained in a separate repository:  
+[MovieBrain Frontend](https://github.com/AlexanderHoughtonCA/moviebrain-react)
 - MovieBrain is primarily for **testing and experimentation** with a microservices architecture.
 
 ## License
