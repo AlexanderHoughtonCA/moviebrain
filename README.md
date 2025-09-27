@@ -22,6 +22,7 @@ New microservices for:
 - **Ratings**
 - **Reviews**
 - **AI-powered recommendations**
+- **API Caching**
 
 ## Architecture
 
