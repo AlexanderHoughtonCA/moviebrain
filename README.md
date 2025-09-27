@@ -15,7 +15,7 @@ It integrates multiple data sources (TMDB, OMDB, MovieLens) and provides a set o
 - **Kubernetes Ready** – each service has a `deploy/` folder with manifests for K8S and build scripts to build the Docker images
 
 ## Coming Soon
-New microservices for
+New microservices for:
 - **Ratings**
 - **Reviews**
 - **AI-powered recommendations**
