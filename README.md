@@ -58,7 +58,7 @@ All services other than mb-common, have two main folders:
 ## Tech Stack
 
 - **Backend:** Node.js, Express, Sequelize, MySQL
-- **Infrastructure:** Docker, Kubernetes, Ingress, MetalLB  
+- **Infrastructure:** Docker, Kubernetes, Ingress  
 - **External APIs:** TMDB, OMDB  
 
 ## Setup Instructions
