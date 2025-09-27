@@ -25,7 +25,7 @@ Replace `docker_private_registry_url` in the deployment files with your private 
 The services are:
 
 ### mb-common
-Not a runnable service, but is shared Sequelize models, migrations, and utilities  
+Not a runnable service, but shared Sequelize models, migrations, and utilities  
 
 ### mb-api-gateway
 Express-based API gateway used by the movie brain website.
@@ -105,7 +105,7 @@ Assuming the DB has been created, run the Sequelize migrations as follows:
 
 
 ### Run Locally
-Start each microservice individually, from its containers/webserver folder:
+Start each microservice individually, in a separate terminal or tab, from its containers/webserver folder:
 ```
 node ./index.js
 ```
