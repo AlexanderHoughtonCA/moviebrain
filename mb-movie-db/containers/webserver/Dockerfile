@@ -8,7 +8,7 @@ EXPOSE 4770
 EXPOSE 4774
 
 # Ubuntu updates
-# RUN apt-get -y update
+RUN apt-get -y update
 ENV DEBIAN_FRONTEND=noninteractive
 
 ENV APP_BASE=/app/K8S/moviebrain/mb-movie-db/containers/webserver
@@ -27,7 +27,7 @@ ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 RUN node --version
 RUN npm --version
 
-# RUN apt-get -y update
+RUN apt-get -y update
 
 RUN apt-get install -y default-mysql-client default-libmysqlclient-dev
 
