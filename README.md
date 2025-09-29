@@ -153,7 +153,7 @@ Example endpoints:
 - `POST /auth/login`  
 
 ## Known Issues
-- Performance needs improvement, api-caching will be implemented ASAP
+- Performance improvements planned; API caching to be implemented soon
 - All microservices currently share a single MySQL database for simplicity.
   While each service has its own Sequelize config, proper separation into dedicated databases is a future goal
 - Logging needs improvement
