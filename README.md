@@ -132,6 +132,8 @@ kubectl apply -f mb-authentication/deploy/
 ...
 ```
 
+**Replace project_tld i nthe deployment with your domain or subdomain for this service**
+
 ## Usage
 
 - API Gateway runs on port **4770** (configurable).  
