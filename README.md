@@ -132,7 +132,7 @@ kubectl apply -f mb-authentication/deploy/
 ...
 ```
 
-**Replace project_tld in the deployment with your domain or subdomain for this service**
+**Replace project_tld in each deployment with your domain or subdomain for that service**
 
 ## Usage
 
