@@ -101,7 +101,7 @@ and enter values for DB_USER, DB_HOST, DB_PORT etc.
 
 While the microservices should strictly speaking have their own databases, to keep things simple, they all use the same DB.
 See db-common for Sequelize models and migrations.
-Each microservice has it's own Sequelize DB config to allow for separate DBs later.
+Each microservice has its own Sequelize DB config to allow for separate DBs later.
 
 ### Data import & Movie Brain Api Key Generation
 The following script will import data from Movie Lens and create API keys for mb-movie-db, mb-tmdb-api and mb-omdb-api.  
