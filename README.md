@@ -2,6 +2,7 @@
 
 MovieBrain is a test project designed for experimenting with microservices architecture.
 It integrates multiple data sources (TMDB, OMDB, MovieLens) and provides a set of backend services that can be deployed together under Kubernetes.
+
 While some design choices (such as a shared database across services) were made for simplicity, the codebase is structured to allow clean separation later. The goal is not just a working app, but an illustration of end-to-end system design, pragmatic trade-offs, and production deployment.
 
 The MovieBrain React frontend can be found here:  
