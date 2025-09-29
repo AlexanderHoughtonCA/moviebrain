@@ -95,7 +95,8 @@ npm install
 - `mb-movie-db/.env` → import scripts generate internal api keys `MB_TMDB_API_KEY` and `MB_OMDB_API_KEY` (See below)
 
 Each service also requires database connection details for Sequelize, see config folder in the relevant services
-and enter values for DB_USER, DB_HOST, DB_PORT etc.  
+and enter values for DB_USER, DB_HOST, DB_PORT etc.
+
 While the microservices should strictly speaking have their own databases, to keep things simple, they all use the same DB.
 See db-common for Sequelize models and migrations.
 
