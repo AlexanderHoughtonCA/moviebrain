@@ -152,6 +152,17 @@ Example endpoints:
 - `GET /person/:id`  
 - `POST /auth/login`  
 
+## Known Issues
+- Performance needs improvement, api-caching will be implemented ASAP
+- All microservices currently share a single MySQL database for simplicity.
+  While each service has its own Sequelize config, proper separation into dedicated databases is a future goal
+- Logging needs improvement
+- Rate limits from external APIs (TMDB/OMDb) may cause delays when seeding or fetching data
+- A background process may be added to gradually fill in missing TMDB data (e.g., poster URLs) in the main DB
+- Code comments need improvement
+- API rate limiting middleware (Express) is planned
+- Unit tests are not yet implemented
+
 ## Notes
 
 - This repository contains **backend services only**. The React frontend is maintained in a separate repository:  
