@@ -3,7 +3,7 @@
 MovieBrain is a test project designed for experimenting with microservices architecture.
 It integrates multiple data sources (TMDB, OMDB, MovieLens) and provides a set of backend services that can be deployed together under Kubernetes.
 
-The MovieBrain React frontend can be found here:
+The MovieBrain React frontend can be found here:  
 [https://github.com/AlexanderHoughtonCA/moviebrain-react](https://github.com/AlexanderHoughtonCA/moviebrain-react)
 
 ## Features
