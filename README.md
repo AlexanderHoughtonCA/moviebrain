@@ -8,9 +8,6 @@ While some design choices (such as a shared database across services) were made 
 The MovieBrain React frontend can be found here:  
 [https://github.com/AlexanderHoughtonCA/moviebrain-react](https://github.com/AlexanderHoughtonCA/moviebrain-react)
 
-## Demo
-[Movie Brain Live DEMO](https://movie-brain.com/)
-
 ## Features
 
 - **JWT token authentication** - Keeping things simple for now, proper email registration and password reset coming soon.
